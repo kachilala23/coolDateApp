@@ -1,0 +1,19 @@
+﻿using Microsoft.EntityFrameworkCore;
+Microsoft.EntityFrameWork.SqlServer;
+Microsoft.EntityFrameworkCore.Design;
+
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+
+Use command line, Cmd or PowerShell for specific version:
+dotnet tool update --global dotnet-ef --version 3.1.0
+or for latest version use (works also for reinstallation):
+dotnet tool update --global dotnet-ef
+
+
+IActionResult allows you to return http responses to the client.
+First vs FirstOrDefault. If we use First and it does not find the value it will return an exception
+If we use default its going to return null if it did not find a value rather than an exception.
+
+
+

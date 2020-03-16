@@ -16,6 +16,7 @@ namespace DateApp.API
 {
     public class Startup
     {
+        private const string AllowAllOriginsPolicy = "AllowAllOriginsPolicy";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,6 +30,15 @@ namespace DateApp.API
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
+            // Add CORS policy
+            services.AddCors(options =>
+            {
+                options.AddPolicy(AllowAllOriginsPolicy,
+                builder =>
+                {
+                    builder.AllowAnyOrigin();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,7 +50,7 @@ namespace DateApp.API
             }
 
             app.UseRouting();
-
+            app.UseCors(AllowAllOriginsPolicy);
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
