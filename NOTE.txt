@@ -15,5 +15,13 @@ IActionResult allows you to return http responses to the client.
 First vs FirstOrDefault. If we use First and it does not find the value it will return an exception
 If we use default its going to return null if it did not find a value rather than an exception.
 
+Add user model as well as the dbset. Run migration.
+dotnet ef migrations add AddUserModel
+
+Repository Pattern
+
+The repository mediates between the data source layer and the business layers of an application. 
+A repository separates the business logic from the interactions with the underlying data source or web service.
+
 
 
