@@ -34,6 +34,17 @@ namespace DateApp.API
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(AllowAllOriginsPolicy,
+                builder =>
+                {
+                    builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowAnyOrigin();
+                });
+            });
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters
@@ -45,15 +56,8 @@ namespace DateApp.API
                         ValidateAudience = false
                     };
                 });
-            // Add CORS policy
-            services.AddCors(options =>
-            {
-                options.AddPolicy(AllowAllOriginsPolicy,
-                builder =>
-                {
-                    builder.AllowAnyOrigin();
-                });
-            });
+            
+           
 
         }
 
@@ -66,7 +70,7 @@ namespace DateApp.API
             }
 
             app.UseRouting();
-            app.UseCors(AllowAllOriginsPolicy);
+            app.UseCors(AllowAllOriginsPolicy);            
             app.UseAuthentication();
             app.UseAuthorization();
 

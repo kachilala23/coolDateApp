@@ -23,6 +23,7 @@ namespace DateApp.API.Controllers
         }
 
         // GET: api/<controller>
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetValues()
         {
